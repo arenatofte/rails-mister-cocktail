@@ -3,6 +3,12 @@ class CocktailsController < ApplicationController
     @cocktails = Cocktail.all
   end
 
+  def destroy
+    @cocktail = Cocktail.find(params[:id])
+    @cocktail.destroy
+    redirect_to cocktail_path(@cocktail)
+  end
+
   def show
     @cocktail = Cocktail.find(params[:id])
     @dose = Dose.new
@@ -19,12 +25,6 @@ class CocktailsController < ApplicationController
     else
       render 'new'
     end
-  end
-
-  def destroy
-    @cocktail = Cocktail.find(params[:id])
-    @cocktail.destroy
-    redirect_to cocktail_path(@cocktail)
   end
 
   private
